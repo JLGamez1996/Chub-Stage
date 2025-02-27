@@ -3,12 +3,15 @@
 
 # The name of the stage.
 # project_name: "Stage Template"
+project_name: "Super Stats"
 
 # A short tagline to show in search.
 # tagline: "A base template for all stages."
+tagline: "A base template for all stats."
 
 # 'PUBLIC', 'PRIVATE', or 'UNLISTED'.
 # visibility: 'PUBLIC'
+visibility: 'PUBLIC'
 
 # 'ADJACENT' | 'NONE' | 'COVER' | 'FULLSCREEN'
 # 'ADJACENT' is default. The frame will display on the side of the
@@ -19,6 +22,7 @@
 # 'FULLSCREEN' will make nothing below the header bar
 #   show except for your stage.
 # position: 'ADJACENT'
+position: 'ADJACENT'
 
 # Self-explanatory.
 # tags:
@@ -26,58 +30,74 @@
 #  - 'Admin'
 #  - 'Template'
 #  - 'Base'
+tags:
+  -  'Stats'
 
+# Whether this REQUIRES a user-given configuration,
+#   versus being able to handle nulls/default values.
+needs_config: false
 # The schema of any user-supplied config.
-# If your stage requires a configuration but has no
+# If your extension requires a configuration but has no
 #   defined schema, it won't work.
+# Config schemas are a superset of JSON Schema format
+# @link https://json-schema.org
 config_schema:
-  type: object
+  # Ignored.
+  $schema: "https://json-schema.org/draft/2020-12/schema"
+  # Will show in the UI. If not given, will be `${project_name} Config`
+  title: Expressions Config
+  # Will show in the UI if not null or empty as a subtitle.
+  description: ''
+  type: "object"
   properties:
-    health:
-      type: integer
-      default: 100
+    selected:
+      # The beginning of non-standard JSON Schema behavior.
+      # JSchema isn't great with the concept of dynamic
+      # schema generation. This is our little addition
+      # to make it easy to define "I need this setting for each character".
+      type: "character_map"
+      # Could also be an object, etc.
+      value_type:
+        type: "string",
+        enum: 'character.extensions.chub.alt_expressions.keys()'
+        default: 'default'
+      # For the type "character_map",
+      # this is a boolean instead of the normal list.
+      # If true, required for each character.
+      required: false
+      # Information shown beside this part of the form.
+      description: "Which expression pack to use, if there are multiple."
+  required: []
 
+# Whether this is state-based in a history-sensitive way,
+#   rather than being able to work with latest-only data.
+# For example, this extension isn't history-based,
+#   as if it's added to an existing chat it will just
+#   display the 'neutral' expression until someone talks.
+# Think like inventory management may need a full history.
+needs_history: false
 # The schema of the state that you store.
 # This isn't needed even if you do store state,
-#   and is here more for future use cases to
-#   optimize storage.
+#   and is here more for future use cases.
 state_schema:
-  init:
-    type: object
-    properties:
-      grid:
-        type: string
-  message:
-    type: object
-    properties:
-      angry:
-        type: boolean
-        default: true
-  chat:
-    type: object
-    properties:
-      visited:
-        type: array
-        items:
-          type: integer
+  type: "character_map"
+  value_type:
+    type: "string"
+    default: "neutral"
+
 
 # Whether to publish as 'Anonymous' instead of under your username.
-# is_anonymous: false
+is_anonymous: false
 
 # Self-explanatory.
-# ratings_disabled: false
+ratings_disabled: false
 
 # This is here for future cases where ex. you need user secrets,
 #    but currently does nothing.
-# permissions:
+permissions:
 
-# extension_id is automatically generated on push with a new project;
+# This is automatically generated on push with a new project;
 #    you should not make or set this value.
-# github_path will be added if it does not exist. It is the URL of the repo.
 
-
+# Will be added if it does not exist. The URL of the repo.
 github_path: 'https://github.com/JLGamez1996/Chub-Stage'
-
-
-extension_id: 'chub-stage-428d2a010053'
-
