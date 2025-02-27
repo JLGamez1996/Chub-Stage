@@ -119,5 +119,4 @@ permissions:
 # Will be added if it does not exist. The URL of the repo.
 github_path: 'https://github.com/JLGamez1996/Chub-Stage'
 
-extension_id: 'chub-stage-7cbd9f4f13f0'
 
