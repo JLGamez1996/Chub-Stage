@@ -41,33 +41,33 @@ needs_config: false
 #   defined schema, it won't work.
 # Config schemas are a superset of JSON Schema format
 # @link https://json-schema.org
-config_schema:
+#config_schema:
   # Ignored.
-  $schema: "https://json-schema.org/draft/2020-12/schema"
+#  $schema: "https://json-schema.org/draft/2020-12/schema"
   # Will show in the UI. If not given, will be `${project_name} Config`
-  title: Expressions Config
+#  title: Expressions Config
   # Will show in the UI if not null or empty as a subtitle.
-  description: ''
-  type: "object"
-  properties:
-    selected:
+#  description: ''
+#  type: "object"
+#  properties:
+#    selected:
       # The beginning of non-standard JSON Schema behavior.
       # JSchema isn't great with the concept of dynamic
       # schema generation. This is our little addition
       # to make it easy to define "I need this setting for each character".
-      type: "character_map"
+#      type: "character_map"
       # Could also be an object, etc.
-      value_type:
-        type: "string",
-        enum: 'character.extensions.chub.alt_expressions.keys()'
-        default: 'default'
+#      value_type:
+#        type: "string",
+#        enum: 'character.extensions.chub.alt_expressions.keys()'
+#        default: 'default'
       # For the type "character_map",
       # this is a boolean instead of the normal list.
       # If true, required for each character.
-      required: false
+#      required: false
       # Information shown beside this part of the form.
-      description: "Which expression pack to use, if there are multiple."
-  required: []
+#      description: "Which expression pack to use, if there are multiple."
+#  required: []
 
 # Whether this is state-based in a history-sensitive way,
 #   rather than being able to work with latest-only data.
@@ -79,11 +79,11 @@ needs_history: false
 # The schema of the state that you store.
 # This isn't needed even if you do store state,
 #   and is here more for future use cases.
-state_schema:
-  type: "character_map"
-  value_type:
-    type: "string"
-    default: "neutral"
+#state_schema:
+#  type: "character_map"
+#  value_type:
+#    type: "string"
+#    default: "neutral"
 
 
 # Whether to publish as 'Anonymous' instead of under your username.
